@@ -1,0 +1,7 @@
+node_modules
+dist/*
+!dist/index.html
+!dist/loading.gif
+!dist/main.css
+npm-debug.log
+.DS_Store
