@@ -1,1 +1,1 @@
-# react-starter
+# framework-boilerplate
