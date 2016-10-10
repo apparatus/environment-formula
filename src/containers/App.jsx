@@ -47,12 +47,6 @@ export default class App extends Component {
               <tbody>
                 <tr className="mui--appbar-height">
                   <td className="mui--text-title">React Starter</td>
-                  <td style={{textAlign: 'right'}}>
-                    <ul className="mui-list--inline mui--text-body2 nav-bar">
-                      <li><Link activeClassName="active" to="/home">Home</Link></li>
-                      <li><Link activeClassName="active" to="/about">About</Link></li>
-                    </ul>
-                  </td>
                 </tr>
               </tbody>
             </table>
