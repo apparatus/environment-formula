@@ -13,7 +13,6 @@ import Col from 'muicss/lib/react/col';
 
 import { resolve } from 'react-resolver';
 import cookie from 'react-cookie';
-import lodash from 'lodash';
 import { push } from 'react-router-redux';
 
 import { callApi } from '../middleware/api';

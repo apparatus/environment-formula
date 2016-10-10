@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import cookie from 'react-cookie';
-import lodash from 'lodash';
 
 import Container from 'muicss/lib/react/container';
 import Row from 'muicss/lib/react/row';

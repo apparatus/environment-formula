@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { Redirect, Router, Route, browserHistory } from 'react-router';
 import cookie from 'react-cookie';
 
-import Login from './containers/Login';
+
 import App from './containers/App';
 import Home from './containers/Home';
 import About from './containers/About';
+
+import { LoginRoute } from 'fullstack-boilerplate';
 
 const validateLogin = (nextState, replace, callback) => {
   // do auth verification here
@@ -14,7 +16,7 @@ const validateLogin = (nextState, replace, callback) => {
 
 export default (props) => (
   <Router history={props.history}>
-    <Route path="/login" component={Login} />
+    <LoginRoute />
     <Redirect from="/" to="/home" />
 
     <Route path="/" component={App}>
