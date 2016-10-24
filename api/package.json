@@ -10,7 +10,7 @@
   "keywords": [
     "api"
   ],
-  "author": "Michele Capra",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "hapi": "^15.2.0",

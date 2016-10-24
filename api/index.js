@@ -4,12 +4,12 @@ const route = require('./route')
 const server = new hapi.Server()
 
 server.connection({
-  host: process.env.HAPI_SERVICE_HOST,
-  port: process.env.HAPI_SERVICE_PORT
+  host: process.env.API_HOST,
+  port: process.env.API_PORT
 })
 
 route(server)
 
 server.start(() => {
-  console.log('hapi server listening on port: ' + process.env.HAPI_SERVICE_PORT)
+  console.log('hapi server listening on port: ' + process.env.API_PORT)
 })
