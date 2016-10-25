@@ -13,8 +13,8 @@ function wiring (cb) {
 
   function pattern () {
     return (pat) => (request, reply) => {
-      if (typeof pat === 'function') { 
-        pat = pat(request.payload) 
+      if (typeof pat === 'function') {
+        pat = pat(request.payload)
       }
       mu.dispatch(pat, function (err, res) {
         reply({result: err ? 'error' : res, err: err})
@@ -22,6 +22,5 @@ function wiring (cb) {
     }
   }
 }
-
 
 module.exports = wiring

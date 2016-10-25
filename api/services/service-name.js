@@ -11,4 +11,3 @@ function serviceName (mu) {
   mu.outbound({role: 'service-name'}, tcp.client(opts))
 }
 
-

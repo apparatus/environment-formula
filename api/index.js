@@ -16,7 +16,7 @@ function api ({mu, server, pattern}, ready) {
     method: 'POST',
     path: '/service-name/cmd/',
     handler: pattern((payload) => ({
-      role: 'service-name', 
+      role: 'service-name',
       cmd: 'cmd',
       someUserValue: payload.someUserValue
     }))
