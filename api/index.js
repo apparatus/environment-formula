@@ -1,15 +1,27 @@
-const hapi = require('hapi')
-const route = require('./route')
+const wiring = require('./wiring')
+const serviceName = require('./services/service-name')
 
-const server = new hapi.Server()
+wiring(api)
 
-server.connection({
-  host: process.env.API_HOST,
-  port: process.env.API_PORT
-})
+function api ({mu, server, pattern}, ready) {
+  serviceName(mu)
 
-route(server)
+  server.route({
+    method: 'GET',
+    path: '/service-name/cmd/',
+    handler: pattern({role: 'service-name', cmd: 'cmd'})
+  })
 
-server.start(() => {
-  console.log('hapi server listening on port: ' + process.env.API_PORT)
-})
+  server.route({
+    method: 'POST',
+    path: '/service-name/cmd/',
+    handler: pattern((payload) => ({
+      role: 'service-name', 
+      cmd: 'cmd',
+      someUserValue: payload.someUserValue
+    }))
+  })
+
+  ready()
+}
+

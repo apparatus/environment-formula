@@ -3,7 +3,5 @@ api:
   container_name: api
   env_file: ./system.env
   ports:
-    - 6001:6001
-    - 6000:6000
-  
-    
+    - "6001:6001"
+    - "6000:6000"
