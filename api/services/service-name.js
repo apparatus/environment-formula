@@ -19,16 +19,16 @@ function serviceName (mu, register) {
 
   register({
     method: 'GET',
-    path: '/service-name/cmd',
-    handler: pattern({role: 'service-name', cmd: 'cmd'})
+    path: '/service-name/a',
+    handler: pattern({role: 'service-name', cmd: 'a'})
   })
 
   register({
     method: 'POST',
-    path: '/service-name/cmd',
+    path: '/service-name/b',
     handler: pattern((payload) => ({
       role: 'service-name', 
-      cmd: 'cmd',
+      cmd: 'b',
       someUserValue: payload.someUserValue
     }))
   })

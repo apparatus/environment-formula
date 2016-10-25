@@ -1,6 +1,8 @@
 const wiring = require('./wiring')
-const serviceName = require('./services/service-name')
 const {router} = wiring
+
+const serviceName = require('./services/service-name')
+// const anotherService = require('./services/another-service')
 
 wiring(api)
 
@@ -13,6 +15,7 @@ function api (mu, server, ready) {
   // see the services folder for more
   
   serviceName(mu, register)
+  // anotherService(mu, register)
 
   ready()
 }
