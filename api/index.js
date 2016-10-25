@@ -1,27 +1,20 @@
 const wiring = require('./wiring')
 const serviceName = require('./services/service-name')
+const {router} = wiring
 
 wiring(api)
 
-function api ({mu, server, pattern}, ready) {
-  serviceName(mu)
+function api (mu, server, ready) {
+  const register = router(server)
 
-  server.route({
-    method: 'GET',
-    path: '/service-name/cmd/',
-    handler: pattern({role: 'service-name', cmd: 'cmd'})
-  })
-
-  server.route({
-    method: 'POST',
-    path: '/service-name/cmd/',
-    handler: pattern((payload) => ({
-      role: 'service-name',
-      cmd: 'cmd',
-      someUserValue: payload.someUserValue
-    }))
-  })
+  // here we initialize the service mediators
+  // transports and routes are setup
+  // in each service mediator
+  // see the services folder for more
+  
+  serviceName(mu, register)
 
   ready()
 }
+
 
