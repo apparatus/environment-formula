@@ -1,10 +1,13 @@
 const tcp = require('mu/drivers/tcp')
-const patternMaker = require('../wiring/pattern')
+const component = require('../lib/component')
+const pattern = require('../lib/pattern')
 
 const opts = {
   port: process.env.SERVICE_NAME_PORT,
   host: process.env.SERVICE_NAME_HOST
 }
+
+const name = 'service-name'
 
 module.exports = serviceName
 
@@ -12,30 +15,47 @@ module.exports = serviceName
 // and the service layer. The service mediators are
 // loaded and initialized in api's root index.js file
 
-function serviceName (mu, register) {
-  const pattern = patternMaker(mu)
+function serviceName (ctx) {
+  const {mu, server} = ctx
+  const handle = pattern(mu)
 
-  mu.outbound({role: 'service-name'}, tcp.client(opts))
+  // set up transport pattern routing
+  mu.outbound({role: name}, tcp.client(opts))
 
-  register({
+  // set up the component
+  component({name}, ctx)
+
+  // if we want to remotely load a component in 
+  // production (instead of building it into app payload)
+  // we can pass `remoteInProd` as true
+  // ```
+  // component({name, remoteInProd: true}, ctx)
+  // ```
+
+  // set up API routes for services
+
+  server.route({
     method: 'GET',
     path: '/service-name/a',
-    handler: pattern({role: 'service-name', cmd: 'a'})
+    handler: handle({role: name, cmd: 'a'})
   })
 
-  register({
+  // we can pass a function to `handle` to extract
+  // required items from the request body (payload)
+
+  server.route({
     method: 'POST',
     path: '/service-name/b',
-    handler: pattern((payload) => ({
-      role: 'service-name', 
+    handler: handle((payload) => ({
+      role: name, 
       cmd: 'b',
       someUserValue: payload.someUserValue
     }))
   })
 
-  // without pattern sugar:
+  // without pattern handle sugar:
   // 
-  // register({
+  // server.route({
   //   method: 'GET',
   //   path: '/service-name/cmd',
   //   handler: (request, reply) => {

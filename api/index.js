@@ -1,23 +1,28 @@
 const wiring = require('./wiring')
-const {router} = wiring
+const config = require('./config')
 
 const serviceName = require('./services/service-name')
-// const anotherService = require('./services/another-service')
+const another = require('./services/service-name')
 
-wiring(api)
+wiring(config, api, ready)
 
-function api (mu, server, ready) {
-  const register = router(server)
+function api (ctx) {
+  const {server} = ctx
 
   // here we initialize the service mediators
   // transports and routes are setup
   // in each service mediator
   // see the services folder for more
   
-  serviceName(mu, register)
-  // anotherService(mu, register)
+  serviceName(ctx)
+  // anotherService(ctx)
 
-  ready()
 }
 
-
+function ready (err, ctx) {
+  const {mu, server} = ctx
+  const {name} = config
+  if (err) { throw err }
+  mu.log.debug(server.info)
+  mu.log.info('hapi server listening on port: ' + server.info.port)
+}

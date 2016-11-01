@@ -11,7 +11,12 @@ function pattern (mu) {
       pat = pat(request.payload)
     }
     mu.dispatch(pat, function (err, res) {
-      reply({result: err ? 'error' : res, err: err})
+      if (err) {
+        reply(mu.error.wrap(err))
+        return
+      }
+
+      reply(res)
     })
   }
 }
