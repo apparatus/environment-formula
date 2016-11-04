@@ -27,8 +27,7 @@ function component (opts, ctx) {
             reply(mu.error.wrap(err))
             return
           }
-
-          reply(res.component)
+          reply(res.payload)
             .header('Content-Type', 'text/javascript')
         }
       )

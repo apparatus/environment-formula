@@ -1,12 +1,5 @@
-const tcp = require('mu/drivers/tcp')
 const component = require('../lib/component')
 const pattern = require('../lib/pattern')
-
-const env = process.env
-const opts = {
-  port: env.SERVICE_NAME_PORT,
-  host: env.SERVICE_NAME_HOST
-}
 
 const name = 'service-name'
 
@@ -20,10 +13,6 @@ function serviceName (ctx) {
   const {mu, server} = ctx
 
   const handle = pattern(mu)
-
-  // set up transport pattern routing
-  
-  mu.outbound({role: name}, tcp.client(opts))
 
   // set up the component
   component({name}, ctx)

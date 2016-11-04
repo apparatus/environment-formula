@@ -10,5 +10,8 @@
   "dependencies": {
     "hapi": "^15.2.0",
     "mu": "^1.1.0"
+  },
+  "devDependencies": {
+    "inert": "^4.0.2"
   }
 }

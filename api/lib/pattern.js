@@ -10,6 +10,7 @@ function pattern (mu) {
     if (typeof pat === 'function') {
       pat = pat(request.payload)
     }
+
     mu.dispatch(pat, (err, res) => {
       reply(err || res)
     })

@@ -4,9 +4,15 @@ api:
   env_file: ./system.env
   ports:
     - "7000:7000"
+frontend:
+  build: ../frontend
+  container_name: frontend
+  env_file: ./system.env
+  ports:
+    - "6000:6000"
 service-name:
   build: ../service-name
   container_name: service-name
   env_file: ./system.env
   ports:
-    - "6000:6000"
+    - "6001:6001"

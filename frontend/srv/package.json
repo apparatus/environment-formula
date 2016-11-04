@@ -1,0 +1,16 @@
+{
+  "description": "backend service",
+  "scripts": {
+    "start": "node .",
+    "test": "tap test"
+  },
+  "devDependencies": {
+    "spacey-standard": "^3.0.0",
+    "tap": "^8.0.0"
+  },
+  "dependencies": {
+    "mu": "^1.1.0"
+  },
+  "private": true,
+  "license": "UNLICENSED"
+}
