@@ -7,9 +7,10 @@ module.exports = component
 
 function component (opts, ctx) {
   const {mu, server} = ctx
-  var name = opts.name
-  var file = opts.filename || 'cmp.js'
-  if (!opts.remoteInProd || !mu.DEV_MODE) {
+  const name = opts.name
+  const file = opts.filename || 'cmp.js'
+  const dev = mu.DEV_MODE
+  if (opts.remoteInProd || !dev) {
     // we do not expose components in production
     // (the build process assembles them into a single package)
     // unless explicitly instructed with remoteInProd
@@ -20,13 +21,15 @@ function component (opts, ctx) {
     method: 'GET',
     path: '/service-name/' + file,
     handler: (request, reply) => {
-      mu.dispatch({role: name, component: true}, 
+      mu.dispatch({role: name, cmd: 'component'}, 
         function (err, res) {
           if (err) {
             reply(mu.error.wrap(err))
             return
           }
+
           reply(res.component)
+            .header('Content-Type', 'text/javascript')
         }
       )
     }

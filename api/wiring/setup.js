@@ -1,5 +1,4 @@
 'use strict'
-const tcp = require('mu/drivers/tcp')
 
 module.exports = setup
 

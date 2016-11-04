@@ -2,7 +2,6 @@ const wiring = require('./wiring')
 const config = require('./config')
 
 const serviceName = require('./services/service-name')
-const another = require('./services/service-name')
 
 wiring(config, api, ready)
 

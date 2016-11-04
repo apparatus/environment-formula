@@ -2,9 +2,10 @@ const tcp = require('mu/drivers/tcp')
 const component = require('../lib/component')
 const pattern = require('../lib/pattern')
 
+const env = process.env
 const opts = {
-  port: process.env.SERVICE_NAME_PORT,
-  host: process.env.SERVICE_NAME_HOST
+  port: env.SERVICE_NAME_PORT,
+  host: env.SERVICE_NAME_HOST
 }
 
 const name = 'service-name'
@@ -17,9 +18,11 @@ module.exports = serviceName
 
 function serviceName (ctx) {
   const {mu, server} = ctx
+
   const handle = pattern(mu)
 
   // set up transport pattern routing
+  
   mu.outbound({role: name}, tcp.client(opts))
 
   // set up the component
@@ -36,8 +39,8 @@ function serviceName (ctx) {
 
   server.route({
     method: 'GET',
-    path: '/service-name/a',
-    handler: handle({role: name, cmd: 'a'})
+    path: '/service-name/one',
+    handler: handle({role: name, cmd: 'one'})
   })
 
   // we can pass a function to `handle` to extract
@@ -45,10 +48,10 @@ function serviceName (ctx) {
 
   server.route({
     method: 'POST',
-    path: '/service-name/b',
+    path: '/service-name/two',
     handler: handle((payload) => ({
       role: name, 
-      cmd: 'b',
+      cmd: 'two',
       someUserValue: payload.someUserValue
     }))
   })

@@ -1,5 +1,5 @@
 {
-  "name": "build",
+  "name": "frontend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,7 +10,6 @@
   "author": "David Mark Clements",
   "license": "MIT",
   "dependencies": {
-    "mu": "^1.1.0",
-    "proxyquire": "^1.7.10"
+    "hyperx": "^2.0.5"
   }
 }
