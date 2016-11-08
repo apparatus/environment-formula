@@ -38,4 +38,24 @@ function frontend (ctx, opts) {
       )
     }
   })
+
+  server.route({
+    method: 'GET',
+    path: '/styles.css',
+    handler: (request, reply) => {
+      mu.dispatch({role: 'frontend', cmd: 'styles'}, 
+        function (err, res) {
+          if (err) {
+            reply(mu.error.wrap(err))
+            return
+          }
+          reply(res.payload)
+            .header('Content-Type', 'text/css')
+        }
+      )
+    }
+  })
+
+  
+
 }

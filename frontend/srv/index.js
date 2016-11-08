@@ -7,13 +7,19 @@ wiring(config, service, ready)
 
 function service (ctx) {
   const {mu} = ctx
-  const {name} = config
+  const {name, dev} = config
 
   mu.define({role: name, cmd: 'app'}, (args, cb) => {
     app(args, (err, payload) => {
       cb(null, {payload: payload})
     })
-  })  
+  })
+
+  mu.define({role: name, cmd: 'styles'}, (args, cb) => {
+    app.styles({dev}, (err, payload) => {
+      cb(null, {payload: payload})
+    })
+  })
 
 }
 

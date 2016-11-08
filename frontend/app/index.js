@@ -1,5 +1,6 @@
 const React = require('react')
 const {render} = require('react-dom')
+const cls = require('./styles')
 const meld = require('./wiring/melder')({React})
 const load = require('./wiring/load')
 
@@ -23,16 +24,12 @@ function app (cmps) {
     render: function () { return React.createElement(root, this.state) }
   })
   const App = store({entries: []}, function (props) {
-    return meld `<div>
-      <div>
-        <div>
-          <h1> foo </h1>
-        </div>
-        <div>
-          ${serviceNameCmp(props)}
-        </div>
+    return meld `
+      <div class="${cls.app}">
+        <h1 class="${cls.title}"> Service Tester </h1>
+        ${serviceNameCmp(props)}
       </div>
-    </div>`
+    `
   })
 
   app.store = render(React.createElement(App), document.getElementById('app'))
