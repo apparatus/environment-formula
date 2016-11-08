@@ -1,17 +1,19 @@
+'use strict'
+
 module.exports = pattern
 
-// convenience function, applies the normal
-// case for hooking up a microservice pattern
-// with an api call. 
-// See the services folder for a usage 
+// convenience function, 
+// useful for hooking up a microservice pattern
+// with an incoming api call. 
+// See the services/service-name.js file for usage 
 
 function pattern (mu) {
   return (pat) => (request, reply) => {
-    if (typeof pat === 'function') {
-      pat = pat(request.payload)
-    }
+    const pattern = (typeof pat === 'function') 
+      ? pat(request.payload)
+      : pat
 
-    mu.dispatch(pat, (err, res) => {
+    mu.dispatch(pattern, (err, res) => {
       reply(err || res)
     })
   }

@@ -1,6 +1,6 @@
 const React = require('react')
 const {render} = require('react-dom')
-const meld = require('./wiring/meld')
+const meld = require('./wiring/melder')({React})
 const load = require('./wiring/load')
 
 // this is a general dispatch function, 

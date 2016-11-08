@@ -1,6 +1,9 @@
+'use strict'
+
 const wiring = require('./wiring')
 const config = require('./config')
 
+const polyfill = require('./services/polyfill')
 const serviceName = require('./services/service-name')
 
 wiring(config, api, ready)
@@ -14,7 +17,7 @@ function api (ctx) {
   // see the services folder for more
   
   serviceName(ctx)
-  // anotherService(ctx)
+  polyfill(ctx)
 
 
 }

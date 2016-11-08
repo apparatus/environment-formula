@@ -1,6 +1,7 @@
 'use strict'
 
 const inert = require('inert')
+const h2o2 = require('h2o2')
 const tcp = require('mu-tcp')
 
 module.exports = setup
@@ -19,7 +20,7 @@ function setup (ctx, opts, cb) {
     host: env.SERVICE_NAME_HOST
   }))
 
-  server.register(inert, function (err) {
+  server.register([inert, h2o2], function (err) {
     if (err) { return cb(err) }
     server.start(cb)  
   })
