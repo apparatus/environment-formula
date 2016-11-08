@@ -1,7 +1,7 @@
 'use strict'
 
 const inert = require('inert')
-const tcp = require('mu/drivers/tcp')
+const tcp = require('mu-tcp')
 
 module.exports = setup
 

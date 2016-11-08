@@ -41,7 +41,7 @@ function serviceName (ctx) {
     handler: handle((payload) => ({
       role: name, 
       cmd: 'two',
-      someUserValue: payload.someUserValue
+      someUserData: payload.someUserData
     }))
   })
 
