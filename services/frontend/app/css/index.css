@@ -1,0 +1,19 @@
+@import './settings.css';
+@import 'tachyons/src/tachyons.css';
+
+/* 
+  other libs outside of tachyons main scope that may come in handy
+  these will need to be installed, e.g. 
+
+    $ npm i --save-dev css-min-width-scale-dc
+
+*/
+
+
+/*@import 'css-min-width-scale-dc/src/css-min-width-scale.css';
+@import 'css-min-widths-dc/src/css-min-widths.css';
+@import 'css-background-repeat-dc/src/css-background-repeat.css';
+@import 'css-min-height-scale-dc/src/css-min-height-scale.css';
+@import 'css-width-scale-dc/src/css-width-scale.css';
+@import 'css-cursors-dc/src/css-cursors.css';
+@import 'tachyons-negative-margin/src/tachyons-negative-margin.css';*/

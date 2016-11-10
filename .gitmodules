@@ -1,0 +1,3 @@
+[submodule "services/service-name"]
+	path = services/service-name
+	url = https://github.com/nearform/fullstack-boilerplate

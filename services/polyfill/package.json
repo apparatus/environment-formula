@@ -1,0 +1,32 @@
+{
+  "name": "polyfill",
+  "version": "0.0.1",
+  "description": "polyfill service",
+  "scripts": {
+    "start": "node srv",
+    "build-cmp": "cd cmp && npm run build",
+    "test": "tap -R spec srv/test cmp/test --branches=90 --statements=90 --functions=90 --lines=90",
+    "cov-report": "npm test -- --coverage-report=html",
+    "install": "cd srv && npm install && cd ../cmp && npm install",
+    "lint": "echo 'linting...' && spacey-standard",
+    "audit": "cd srv && auditjs && cd ../cmp && auditjs",
+    "boil": "echo 'boiling...' && npm run boil-srv",
+    "boil-srv": "node -e 'srv = require(`./srv/package.json`);require(`assert`)(!srv.name && !srv.version, `srv package.json should not have name or version fields`)'"
+  },
+  "devDependencies": {
+    "auditjs": "^1.2.0",
+    "pre-commit": "^1.1.3",
+    "spacey-standard": "^3.0.0",
+    "tap": "^7.1.2"
+  },
+  "precommit": [
+    "test",
+    "boil",
+    "lint"
+  ],
+  "license": "UNLICENSED",
+  "dependencies": {
+    "pino": "^2.15.0",
+    "polyfill-service": "^3.13.0"
+  }
+}
