@@ -1,0 +1,24 @@
+api:
+  build: ../srv/api
+  container_name: api
+  env_file: ./env
+  ports:
+    - "7000:7000"
+polyfill:
+  build: ../srv/polyfill
+  container_name: polyfill
+  env_file: ./env
+  ports:
+    - "6999:6999"
+frontend:
+  build: ../srv/frontend
+  container_name: frontend
+  env_file: ./env
+  ports:
+    - "6000:6000"
+service-name:
+  build: ../srv/service-name
+  container_name: service-name
+  env_file: ./env
+  ports:
+    - "6001:6001"

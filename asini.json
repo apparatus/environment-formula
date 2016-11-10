@@ -1,0 +1,12 @@
+{
+  "asini": "1.1.0",
+  "packages": [
+    {
+      "glob": "services/*/package.json"
+    },
+    {
+      "glob": "scripts/package.json"
+    }
+  ],
+  "version": "independent"
+}

@@ -9,6 +9,9 @@ module.exports = {
   // Log to file, not console logs are found in ./logs
   tail: true,
 
+  // watch services
+  monitor: true,
+
   // Restart microservices if they explode
   restartOnError: false,
 

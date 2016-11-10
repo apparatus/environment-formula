@@ -1,0 +1,42 @@
+{
+  "name": "environment-boilerplate",
+  "private": "true",
+  "description": "",
+  "scripts": {
+    "setup": "asini bootstrap && npm i",
+    "upgrade": "node ./scripts/upgrade",
+    "lint": "asini exec -- node -e 'require(`${process.env.PWD}/scripts/lint`)' --",
+    "test": "tap './srv/*/test/*.js' --branches=90 --statements=90 --functions=90 --lines=90",
+    "verify": "node scripts/verify",
+    "coverage": "npm test -- --cov --coverage-report=html",
+    "release": "asini publish --skip-npm",
+    "clean": "asini clean",
+    "ci": "npm run setup && npm run lint && npm test"
+  },
+  "nyc": {
+    "exclude": [
+      "**/test/**/*.js"
+    ]
+  },
+  "pre-commit": [
+    "verify",
+    "lint",
+    "test"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nearform/environment-boilerplate/"
+  },
+  "keywords": [],
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "asini": "1.1.0",
+    "auditjs": "^1.2.0",
+    "snazzy": "^5.0.0",
+    "spacey-standard": "^3.0.0",
+    "tap": "^8.0.0"
+  },
+  "dependencies": {
+    "pre-commit": "^1.1.3"
+  }
+}

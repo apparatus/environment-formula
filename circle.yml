@@ -1,0 +1,8 @@
+machine:
+  node:
+    version: 6.9.1
+test:
+  override:
+    - npm run ci
+    - nvm use 6 && npm run ci
+    - nvm use node && npm run ci
