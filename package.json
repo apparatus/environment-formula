@@ -31,7 +31,6 @@
   "license": "UNLICENSED",
   "devDependencies": {
     "asini": "1.1.0",
-    "auditjs": "^1.2.0",
     "snazzy": "^5.0.0",
     "spacey-standard": "^3.0.0",
     "tap": "^8.0.0"

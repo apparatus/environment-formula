@@ -15,6 +15,15 @@ Must be run on Node 6+
 * polyfill - auto-polyfill service
 * service-name - example fullstack service
 
+## Quick Start
+
+```sh
+$ npm install -g fuge
+$ npm run setup
+$ fuge shell config/service.yml
+> start all
+```
+
 ## Workflow Commands
 
 From the project root, the following commands can be used
@@ -69,3 +78,4 @@ GH release for each changed service.
 ### `npm run ci`
 
 Command that CI platform (Travis, CircleCI) uses
+g
