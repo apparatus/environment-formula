@@ -1,11 +1,11 @@
 const browserify = require('browserify')
 const styles = require('./styles')
 const builtins = {_process: require('browserify/lib/builtins')._process}
-const {name} = require('../config')
+const {name} = require('../package.json')
 
-module.exports = remote
+module.exports = bundle
 
-function remote (opts) {
+function bundle (opts) {
   if (opts.dev) {
     var full = true
     var WebSocketServer = require('uws').Server
@@ -21,7 +21,7 @@ function remote (opts) {
   var cached = ''
   var cachedCss = ''
 
-  bundle((err, code) => {
+  make((err, code) => {
     if (err) {
       console.warn('Unable to create initial bundle', err)
       return
@@ -43,16 +43,16 @@ function remote (opts) {
 
   function html (cb) {
     if (cached) return cb(null, cached)
-    bundle((err, code) => {
+    make((err, code) => {
       if (err) return cb(err)
       cached = code
       cb(null, code)
     })
   }
 
-  function bundle (cb) {
+  function make (cb) {
     browserify({builtins: builtins, standalone: opts.dev && name})
-      .add(require.resolve('../'))
+      .add(require.resolve('../app'))
       .bundle((err, buf) => {
         if (err) return console.error(err)
         buf = buf.toString()

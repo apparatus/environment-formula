@@ -6,7 +6,6 @@ module.exports = {
   name: name,
   dev: env.NODE_ENV !== 'production',
   context: {
-    dev: env.NODE_ENV !== 'production'
   },
   // restify:
   // context: {

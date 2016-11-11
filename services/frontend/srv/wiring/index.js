@@ -4,12 +4,11 @@ const setup = require('./setup')
 
 module.exports = wiring
 
-function wiring (opts, service, ready) {
+function wiring (opts, ready) {
   context(opts.context, init)
 
   function init (err, ctx) {
     if (err) return ready(err)
-    service(ctx)
     setup(ctx, opts.setup, (err) => ready(err, ctx))
   }
 }

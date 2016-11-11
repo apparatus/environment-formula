@@ -1,0 +1,7 @@
+{ 
+  "private": true,
+  "main": "index.js",
+  "devDependencies": {
+    "browserify": "^13.1.1"
+  }
+}
