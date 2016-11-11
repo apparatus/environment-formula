@@ -12,13 +12,9 @@ issues.forEach((s) => {
   }
 })
 
-const passes = services.filter(({invalid}) => !invalid)
-
-passes.forEach(build)
-
 const fails = services.filter(({invalid}) => invalid)
 
 if (fails.length) { console.log('Unable to build ', fails) }
 
-process.exit()
+build(services)
 

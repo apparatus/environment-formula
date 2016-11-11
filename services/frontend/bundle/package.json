@@ -11,7 +11,6 @@
   "license": "MIT",
   "dependencies": {
     "browserify": "^13.1.1",
-    "tachyons-build-css": "^1.1.2",
-    "uws": "^0.11.0"
+    "tachyons-build-optimal-css": "^1.1.0"
   }
 }

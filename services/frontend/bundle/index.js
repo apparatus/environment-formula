@@ -6,74 +6,72 @@ const {name} = require('../package.json')
 module.exports = bundle
 
 function bundle (opts) {
+  var cached = ''
+  var cachedCss = ''
   if (opts.dev) {
-    var full = true
-    var WebSocketServer = require('uws').Server
-    var wss = new WebSocketServer({ port: 35729 })
-    var sockets = []
-    wss.on('connection', function (ws) {
-      sockets.push(ws)
-      ws.send(full ? 'full' : 'cmps')
-      full = false
+    make((err, code) => {
+      if (err) {
+        console.warn('Unable to create initial bundle', err)
+        return
+      }
+      cached = code
+    })
+    styles(opts, (err, css) => {
+      if (err) {
+        console.warn('Unable to create initial styles', err)
+        return
+      }
+      cachedCss = css
     })
   }
 
-  var cached = ''
-  var cachedCss = ''
+  app.css = css
 
-  make((err, code) => {
-    if (err) {
-      console.warn('Unable to create initial bundle', err)
-      return
-    }
-    cached = code
-  })
-  styles(opts, (err, css) => {
-    if (err) {
-      console.warn('Unable to create initial styles', err)
-      return
-    }
-    cachedCss = css
-  })
+  return app
 
-  html.css = css
-  html.reload = () => sockets.forEach((s) => s.close())
-
-  return html
-
-  function html (cb) {
+  function app (cb) {
     if (cached) return cb(null, cached)
-    make((err, code) => {
+    return make(cb && ((err, code) => {
       if (err) return cb(err)
-      cached = code
+      if (opts.dev) cached = code
       cb(null, code)
-    })
+    }))
   }
 
   function make (cb) {
-    browserify({builtins: builtins, standalone: opts.dev && name})
-      .add(require.resolve('../app'))
-      .bundle((err, buf) => {
-        if (err) return console.error(err)
-        buf = buf.toString()
-        if (opts.dev) {
-          buf += `
-            ;(function live() {
-              var reload = new WebSocket('ws://localhost:35729')
-              reload.onmessage = frontend.reload
-              reload.onclose = setTimeout.bind(null, live, 500)
-            }());
-          `
-        }
-        cb(null, buf)
-      })
+    var build = browserify(Object.assign(
+      {
+        builtins: builtins,
+        standalone: opts.dev && name
+      },
+      opts
+    ))
+
+    build.add(require.resolve('../app'))
+
+    if (!cb) return build.bundle()
+
+    build.bundle((err, buf) => {
+      if (err) return cb(err)
+      buf = buf.toString()
+      if (opts.dev) {
+        buf += `
+          ;(function dev () {
+            var reload = new WebSocket('ws://localhost:35729')
+            reload.onmessage = frontend.reload
+            reload.onclose = dev
+          }());
+        `
+      }
+      cb(null, buf)
+    })
   }
 
   function css (cb) {
     if (cachedCss) return cb(null, cachedCss)
     styles(opts, (err, css) => {
       if (err) return cb(err)
-      cachedCss = css
+      if (opts.dev) cachedCss = css
       cb(null, css)
     })
   }

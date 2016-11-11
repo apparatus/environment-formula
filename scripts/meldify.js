@@ -2,8 +2,8 @@ const falafel = require('falafel')
 const through = require('through2')
 const hyperx = require('hyperx')
 
-const MELD_REQUIRE = './wiring/meld'
-const DOM_GEN_FN = 'require("react").createElement'
+const MELD_REQUIRE = './wiring/melder'
+const DOM_GEN_FN = '(({React}) => React.createElement)'
 
 module.exports = function (file, opts) {
   if (/\.json$/.test(file)) return through()

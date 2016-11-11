@@ -1,13 +1,11 @@
 'use strict'
 
+const config = require('../config')
+const opts = config.frontend
+
 module.exports = frontend
 
-// convenience function, applies the normal
-// case for hooking up a microservice frontend
-// with an api call.
-// See the services folder for a usage
-
-function frontend (ctx, opts) {
+function frontend (ctx) {
   const {mu, server} = ctx
   const staticDir = opts.staticDir
   const filename = opts.filename || 'app.js'

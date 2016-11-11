@@ -2,7 +2,7 @@ const {resolve, join, basename} = require('path')
 const fs = require('fs')
 const {api, serviceMediatorDir, servicesDir} = require('./config')
 
-if (process.mainModule) {
+if (process.mainModule === module) {
   const issues = []
   const services = require('./manifest')(issues)
   process.stdout.write('verifying structure... ')
@@ -13,31 +13,15 @@ if (process.mainModule) {
   process.exit(issues.length ? 1 : 0)
 }
 
-
 module.exports = verify
 
 function verify (fullstackers, issues) {
   var list = []
 
-  list = list
-      .concat(
-        fullstackers
-          .map(({service}) => exists('service', service))
-      ).filter(Boolean)
-
-  list = list
-      .concat(
-        fullstackers
-          .filter(({service}) => !list.find(({type}) => type === service))
-          .map(({service, cmp}) => exists('cmp', service, cmp))
-      ).filter(Boolean)
-
-  list = list
-      .concat(
-        fullstackers
-          .filter(({service}) => !list.find(({type}) => type === service))
-          .map(({service, srv}) => exists('srv', service, srv))
-      ).filter(Boolean)
+  list = check(list, fullstackers, 'service')
+  list = check(list, fullstackers, 'service', 'cmp')
+  list = check(list, fullstackers, 'service', 'srv')
+  list = check(list, fullstackers, 'service', 'bundle')
 
   issues.push(...list)
 
@@ -62,6 +46,15 @@ function verify (fullstackers, issues) {
     }
   }
 
+  function check (list, fullstackers, service, sub) {
+    return list
+        .concat(
+          fullstackers
+            .filter(({service}) => !list.find(({type}) => type === service))
+            .map((f) => exists('cmp', f.service, sub && f[sub]))
+        ).filter(Boolean)
+  }
+
   function describe (issues) {
     return (
       describeWarning(
@@ -75,6 +68,9 @@ function verify (fullstackers, issues) {
       ) +
       describeBackendSrv(
         issues.filter(({type}) => type === 'srv')
+      ) +
+      describeBundle(
+        issues.filter(({type}) => type === 'bundle')
       )
     )
   }
@@ -177,6 +173,26 @@ function verify (fullstackers, issues) {
 
         But have no corresponding backend service at:
           ${issues[0].srv}
+
+      `.replace(/^ {6}/gm, '   ')
+  }
+
+  function describeBundle (issues) {
+    if (issues.length === 0) { return '' }
+
+    if (issues.length === 1) {
+      return `
+        Unable to find the bundle folder for "${issues[0].name}"
+
+        This is needed to build the app ui
+
+      `.replace(/^ {6}/gm, '   ')
+    }
+
+    return `
+        Unable to find bundle folders for "${issues[0].name}"
+
+        These are needed to build the app ui
 
       `.replace(/^ {6}/gm, '   ')
   }

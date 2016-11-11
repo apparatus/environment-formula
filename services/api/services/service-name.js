@@ -17,13 +17,6 @@ function serviceName (ctx) {
   // set up the component
   component({name}, ctx)
 
-  // if we want to remotely load a component in
-  // production (instead of building it into app payload)
-  // we can pass `remoteInProd` as true
-  // ```
-  // component({name, remoteInProd: true}, ctx)
-  // ```
-
   // set up API routes for services
 
   server.route({

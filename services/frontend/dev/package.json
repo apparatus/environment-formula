@@ -2,6 +2,7 @@
   "private": true,
   "main": "index.js",
   "devDependencies": {
-    "browserify": "^13.1.1"
+    "browserify": "^13.1.1",
+    "uws": "^0.11.0"
   }
 }

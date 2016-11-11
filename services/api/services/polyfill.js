@@ -1,3 +1,5 @@
+'use strict'
+
 const proxy = require('../lib/proxy')
 
 const name = 'polyfill'
