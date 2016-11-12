@@ -3,6 +3,7 @@
   "private": "true",
   "description": "",
   "scripts": {
+    "build": "node scripts/builder",
     "setup": "asini bootstrap && npm i",
     "upgrade": "node ./scripts/upgrade",
     "lint": "asini exec -- node -e 'require(`${process.env.PWD}/scripts/lint`)' --",

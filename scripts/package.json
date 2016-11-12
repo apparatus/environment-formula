@@ -17,5 +17,9 @@
     "hyperx": "^2.0.5",
     "through": "^2.3.8",
     "through2": "^2.0.1"
+  },
+  "dependencies": {
+    "abstract-logging": "^1.0.0",
+    "through2": "^2.0.1"
   }
 }

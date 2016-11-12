@@ -1,7 +1,10 @@
+// process.env.NODE_ENV = 'production'
+
 const verify = require('./verify')
 const issues = []
 const services = require('./manifest')(issues)
 const build = require('./build')
+
 
 verify(services, issues)
 

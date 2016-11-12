@@ -78,4 +78,3 @@ GH release for each changed service.
 ### `npm run ci`
 
 Command that CI platform (Travis, CircleCI) uses
-g
