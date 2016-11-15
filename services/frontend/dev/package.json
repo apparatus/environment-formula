@@ -1,4 +1,5 @@
 { 
+  "name": "dev",
   "private": true,
   "main": "index.js",
   "devDependencies": {

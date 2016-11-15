@@ -46,7 +46,12 @@
 
 #### inbound route: '*'
 
-**transport:** mu-local
+**transport:** mu-tcp
+
+**source host:** process.env.SERVICE_NAME_HOST
+
+**source port:** process.env.SERVICE_NAME_PORT
+
 
 ## Service: frontend
 

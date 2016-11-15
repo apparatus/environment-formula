@@ -18,7 +18,7 @@ function load (cmps, ctx, cb) {
 function create (cmp, source, ctx) {
   const {React} = ctx
   const module = {exports: {}}
-  /*eslint no-new-func: 0*/
+  /* eslint no-new-func: 0 */
   Function('module', 'exports', source)(module, module.exports)
   const component = ((module.exports.__esModule)
     ? module.exports.default

@@ -1,4 +1,5 @@
 {
+  "name": "cmp",
   "description": "frontend component",
   "scripts": {
     "test": "tap test",
@@ -9,7 +10,7 @@
     "end-of-stream": "^1.1.0",
     "falafel": "^2.0.0",
     "hyperxify": "^2.0.1",
-    "spacey-standard": "^3.0.0",
+    "spacey-standard": "^4.0.0",
     "tachyons": "^4.5.5",
     "tap": "^8.0.0",
     "tape": "^4.6.2",

@@ -26,7 +26,7 @@ module.exports = function (file, opts) {
         node.update('0')
       }
       if (ns && node.callee && node.callee.name === ns) {
-        /*eslint no-new-func: 0*/
+        /* eslint no-new-func: 0 */
         node.update(
           `var ${ns} = ${node.arguments[2].source()}\n` +
           '  load(null, {' +

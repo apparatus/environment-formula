@@ -1,11 +1,12 @@
 {
+  "name": "srv",
   "description": "backend service",
   "scripts": {
     "start": "node .",
     "test": "tap test"
   },
   "devDependencies": {
-    "spacey-standard": "^3.0.0",
+    "spacey-standard": "^4.0.0",
     "tap": "^8.0.0"
   },
   "dependencies": {

@@ -15,7 +15,7 @@ function build (services) {
   const main = services.find(({main}) => main)
 
   const bundle = require(main.bundle)({
-    transform: [loadify, /* meldify,*/ es2040, uglifyify],
+    transform: [loadify, /* meldify, */ es2040, uglifyify],
     whitelist: cssWhitelist(services)
   })
 

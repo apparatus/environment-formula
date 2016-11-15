@@ -1,4 +1,5 @@
 {
+  "name": "srv",
   "description": "polyfill service",
   "scripts": {
     "start": "node .",

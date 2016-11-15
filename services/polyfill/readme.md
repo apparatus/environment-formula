@@ -52,9 +52,3 @@ npm run audit
 npm run lint
 ```
 
-### structural checks
-
-```sh
-npm run boil
-```
-
