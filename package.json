@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "build": "node scripts/builder",
-    "setup": "asini bootstrap && npm i",
+    "setup": "npm i && asini bootstrap",
     "upgrade": "node ./scripts/upgrade",
     "lint": "asini exec -- node -e 'require(`${process.env.PWD}/scripts/lint`)' --",
     "test": "tap './srv/*/test/*.js' --branches=90 --statements=90 --functions=90 --lines=90",

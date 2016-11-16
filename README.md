@@ -18,9 +18,11 @@ Must be run on Node 6+
 ## Quick Start
 
 ```sh
+$ git clone --recursive https://github.com/nearform/environment-boilerplate/
+$ cd environment-boilerplate
 $ npm install -g fuge
 $ npm run setup
-$ fuge shell config/service.yml
+$ fuge shell config/system.yml
 > start all
 ```
 
