@@ -4,18 +4,11 @@
   "description": "frontend",
   "scripts": {
     "start": "node srv",
-    "build-cmp": "cd cmp && npm run build",
     "test": "tap -R spec srv/test cmp/test --branches=90 --statements=90 --functions=90 --lines=90",
-    "cov-report": "npm test -- --coverage-report=html",
-    "install": "cd srv && npm install && cd ../cmp && npm install",
-    "lint": "echo 'linting...' && spacey-standard",
-    "audit": "cd srv && auditjs && cd ../cmp && auditjs",
-    "boil": "echo 'boiling...' && npm run boil-srv && npm run boil-cmp",
-    "boil-srv": "node -e 'srv = require(`./srv/package.json`);require(`assert`)(!srv.name && !srv.version, `srv package.json should not have name or version fields`)'",
-    "boil-cmp": "node -e 'cmp = require(`./cmp/package.json`);require(`assert`)(!cmp.name && !cmp.version, `cmp package.json should not have name or version fields`)'"
+    "coverage": "npm test -- --coverage-report=html",
+    "lint": "echo 'linting...' && spacey-standard"
   },
   "devDependencies": {
-    "auditjs": "^1.2.0",
     "pre-commit": "^1.1.3",
     "spacey-standard": "^4.0.0",
     "tap": "^7.1.2"

@@ -3,13 +3,6 @@
   "private": true,
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "David Mark Clements",
-  "license": "MIT",
   "dependencies": {
     "browserify": "^13.1.1",
     "tachyons-build-optimal-css": "^1.1.0"

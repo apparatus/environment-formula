@@ -13,6 +13,5 @@
     "mu": "^2.0.4",
     "mu-tcp": "^1.0.3"
   },
-  "private": true,
-  "license": "UNLICENSED"
+  "private": true
 }

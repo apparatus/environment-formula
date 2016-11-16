@@ -2,8 +2,7 @@
   "name": "cmp",
   "description": "frontend component",
   "scripts": {
-    "test": "tap test",
-    "build": "echo '<p> ok so build it </p>'"
+    "test": "tap test"
   },
   "devDependencies": {
     "browserify": "^13.1.1",
@@ -22,6 +21,5 @@
     "react-dom": "^15.3.2",
     "tachyons-build-css": "^1.1.2"
   },
-  "private": true,
-  "license": "MIT"
+  "private": true
 }
