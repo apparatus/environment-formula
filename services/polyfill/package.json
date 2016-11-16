@@ -4,10 +4,8 @@
   "description": "polyfill service",
   "scripts": {
     "start": "node srv",
-    "build-cmp": "cd cmp && npm run build",
     "test": "tap -R spec srv/test cmp/test --branches=90 --statements=90 --functions=90 --lines=90",
-    "cov-report": "npm test -- --coverage-report=html",
-    "install": "cd srv && npm install && cd ../cmp && npm install",
+    "coverage": "npm test -- --coverage-report=html",
     "lint": "echo 'linting...' && spacey-standard"
   },
   "devDependencies": {
@@ -21,7 +19,7 @@
     "boil",
     "lint"
   ],
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
     "pino": "^2.15.0",
     "polyfill-service": "^3.13.0"

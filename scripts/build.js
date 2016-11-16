@@ -9,7 +9,6 @@ const loadify = require('./loadify')
 const buildDir = join(__dirname, '..', 'ui-build')
 module.exports = build
 
-
 function build (services) {
   createBuildDir()
   const main = services.find(({main}) => main)
@@ -33,7 +32,6 @@ function build (services) {
 
   fs.createReadStream(join(main.static, 'index.html'))
     .pipe(fs.createWriteStream(join(buildDir, 'index.html')))
-
 }
 
 function cssWhitelist (services) {

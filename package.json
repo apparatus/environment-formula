@@ -4,14 +4,13 @@
   "description": "",
   "scripts": {
     "build": "node scripts/builder",
-    "setup": "npm i && asini bootstrap",
-    "upgrade": "node ./scripts/upgrade",
+    "setup": "npm i --no-progress --depth=0 && cd scripts && npm i --no-progress --depth=0 && cd .. && asini exec -- node -e 'require(`${process.env.PWD}/scripts/setup`)'",
     "lint": "asini exec -- node -e 'require(`${process.env.PWD}/scripts/lint`)' --",
     "test": "tap './srv/*/test/*.js' --branches=90 --statements=90 --functions=90 --lines=90",
     "verify": "node scripts/verify",
     "coverage": "npm test -- --cov --coverage-report=html",
     "release": "asini publish --skip-npm",
-    "clean": "asini clean",
+    "clean": "asini exec -- node -e 'require(`${process.env.PWD}/scripts/clean`)'",
     "ci": "npm run setup && npm run lint && npm test"
   },
   "nyc": {

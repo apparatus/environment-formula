@@ -18,7 +18,6 @@ module.exports = (issues) => {
     .map((f) => resolve(__dirname, '..', servicesDir, parse(f).name))
 
   const fullstackers = list.map((service) => {
-
     if (basename(service) === frontendNs) {
       return {
         name: basename(service),

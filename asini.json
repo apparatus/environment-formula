@@ -3,12 +3,6 @@
   "packages": [
     {
       "glob": "services/*/package.json"
-    },
-    {
-      "glob": "services/*/*/package.json"
-    },
-    {
-      "glob": "scripts/package.json"
     }
   ],
   "version": "independent"
