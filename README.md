@@ -26,6 +26,17 @@ $ fuge shell config/system.yml
 > start all
 ```
 
+## OSX/macOS ENFILE Problem
+
+If the fuge `start all` results in some services failing to start, 
+showing an "ENFILE" error, it's because since Yosemite file limits
+have been over-zealously restricted. You can either just try to start
+the service that fails individually, or to get rid of the annoyance
+`npm run os-enfile-fix` will solve the problem (but only in your current)
+terminal. To permanently copy the `scripts/osx-enfile-fix.sh` script 
+contents to your `~/.bash_profile`.
+
+
 ## Workflow Commands
 
 From the project root, the following commands can be used

@@ -25,7 +25,7 @@ function install (d, cb) {
       stdio: 'inherit', cwd: d, env: process.env
     }).on('error', cb)
       .on('exit', (code) => {
-        console.log('successfully installed', join('services', cwd === d ? basename(d) : join(basename(cwd), basename(d))))
+        console.log('successfully installed deps for', join('services', cwd === d ? basename(d) : join(basename(cwd), basename(d))), '\n')
         cb(null, {code: code, dir: d})
       })
   })

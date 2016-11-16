@@ -11,7 +11,8 @@
     "coverage": "npm test -- --cov --coverage-report=html",
     "release": "asini publish --skip-npm",
     "clean": "asini exec -- node -e 'require(`${process.env.PWD}/scripts/clean`)'",
-    "ci": "npm run setup && npm run lint && npm test"
+    "ci": "npm run setup && npm run lint && npm test",
+    "osx-enfile-fix": "bash scripts/osx-enfile-fix.sh"
   },
   "nyc": {
     "exclude": [

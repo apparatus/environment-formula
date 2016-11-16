@@ -1,54 +1,10 @@
-# service-name
+# polyfill service
 
-service-name is a fullstack-microservice
+The polyfill service is part of the environment boilerplate
 
-For more info see [fullstack-microservice docs](https://github.com/nearform/fullstack-boilerplate/tree/boilerplate-docs).
+It's set within the standard service scaffolding, and uses the 
+`polyfill-service` module which is the module behind http://polyfill.io
 
-## api
-
-description of service specifics here (e.g. supported patterns/routes)
-
-## development
-
-`srv` is the backend service
-
-`cmp` is the frontend component
-
-Both pieces are manageable from the project root, using the following commands.
-
-### install
-
-```sh
-npm install
-```
-
-### start
-
-```sh
-npm start
-```
-
-### test
-
-```sh
-npm test
-```
-
-### coverage analysis
-
-```sh
-npm run cov-report
-```
-
-### audit dependencies
-
-```sh
-npm run audit
-```
-
-### lint
-
-```sh
-npm run lint
-```
+This allows us to self-host a service that delivers the correct 
+polyfill payload depending on the browser feature set.
 
