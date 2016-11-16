@@ -29,7 +29,7 @@
     "url": "https://github.com/nearform/environment-boilerplate/"
   },
   "keywords": [],
-  "license": "UNLICENSED",
+  "license": "MIT",
   "devDependencies": {
     "asini": "1.1.0",
     "snazzy": "^5.0.0",

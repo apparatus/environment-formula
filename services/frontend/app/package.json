@@ -23,5 +23,5 @@
     "tachyons-build-css": "^1.1.2"
   },
   "private": true,
-  "license": "UNLICENSED"
+  "license": "MIT"
 }

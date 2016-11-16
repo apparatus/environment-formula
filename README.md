@@ -66,6 +66,10 @@ in default browser
 
 Remove `node_modules` folder in every service
 
+### `npm run build`
+
+Create a ui-build folder in project route with HTML, CSS and JS.
+
 ### `npm run release`
 
 Allows semver control across services, 
