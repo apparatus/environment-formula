@@ -1,12 +1,12 @@
 const spawn = require('child_process').spawn
 const fs = require('fs')
 const {basename, join} = require('path')
-const parallel = require('fastparallel')()
+const series = require('fastseries')()
 
 var packs = [''].concat(require('./config').packageDirs)
 
 var cwd = process.cwd()
-parallel({}, packs.map((p) => (cb) => install(join(cwd, p), cb)), (err, codes) => {
+series({}, packs.map((p) => (cb) => install(join(cwd, p), cb)), (err, codes) => {
   if (!err && !codes.filter((c) => c.code).length) {
     console.log('successfully installed all sub-deps')
     return

@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "abstract-logging": "^1.0.0",
-    "fastparallel": "^2.3.0",
+    "fastseries": "^1.7.2",
     "through2": "^2.0.1"
   }
 }
