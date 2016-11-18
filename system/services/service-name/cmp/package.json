@@ -1,0 +1,16 @@
+{
+  "name": "cmp",
+  "description": "frontend component",
+  "scripts": {
+    "test": "tap test"
+  },
+  "devDependencies": {
+    "spacey-standard": "^4.0.0",
+    "tap": "^8.0.0",
+    "tape": "^4.6.2"
+  },
+  "dependencies": {
+    "hyperx": "^2.0.5"
+  },
+  "private": true
+}

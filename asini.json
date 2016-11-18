@@ -2,7 +2,13 @@
   "asini": "1.1.0",
   "packages": [
     {
-      "glob": "services/*/package.json"
+      "glob": "system/api/package.json"
+    },
+    {
+      "glob": "system/frontend/package.json"
+    },
+    {
+      "glob": "system/services/*/package.json"
     }
   ],
   "version": "independent"

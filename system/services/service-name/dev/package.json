@@ -1,0 +1,9 @@
+{ 
+  "name": "dev",
+  "private": true,
+  "main": "index.js",
+  "devDependencies": {
+    "browserify": "^13.1.1",
+    "mu-tcp": "^1.0.3"
+  }
+}

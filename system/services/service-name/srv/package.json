@@ -1,0 +1,17 @@
+{
+  "name": "srv",
+  "description": "backend service",
+  "scripts": {
+    "start": "node .",
+    "test": "tap test"
+  },
+  "devDependencies": {
+    "spacey-standard": "^4.0.0",
+    "tap": "^8.0.0"
+  },
+  "dependencies": {
+    "mu": "^2.0.4",
+    "mu-tcp": "^1.0.3"
+  },
+  "private": true
+}

@@ -1,9 +1,9 @@
 const {resolve, join, relative, parse, basename} = require('path')
 const proxyquire = require('proxyquire').noPreserveCache()
 const {
-  api, servicesDir, serviceMediatorDir, componentMarker, frontendNs
+  apiDir, servicesDir, systemDir, targets, componentMarker, frontendNs
 } = require('./config')
-const dir = resolve(__dirname, '..', api)
+const dir = resolve(__dirname, apiDir)
 
 require(join(dir, 'node_modules', 'hapi')).Server = function () {
   this.register = this.connection = function () {}
@@ -13,24 +13,26 @@ require(dir)
 
 module.exports = (issues) => {
   const list = Object.keys(require.cache)
-    .filter((f) => f.match(join(dir, serviceMediatorDir)))
-    .map((f) => relative(join(dir, serviceMediatorDir), f))
-    .map((f) => resolve(__dirname, '..', servicesDir, parse(f).name))
+    .filter((f) => f.match(join(dir, targets)))
+    .map((f) => relative(join(dir, targets), f))
 
-  const fullstackers = list.map((service) => {
-    if (basename(service) === frontendNs) {
+  const targs = list.map((target) => {
+    if (parse(target).name === frontendNs) {
+      target = resolve(__dirname, systemDir, parse(target).name)
       return {
-        name: basename(service),
-        service: service,
-        cmp: join(service, 'app'),
-        srv: join(service, 'srv'),
-        bundle: join(service, 'bundle'),
-        static: join(service, 'static'),
+        name: basename(target),
+        target: target,
+        cmp: join(target, 'app'),
+        srv: join(target, 'srv'),
+        bundle: join(target, 'bundle'),
+        static: join(target, 'static'),
         main: true
       }
     }
+    
+    target = resolve(__dirname, servicesDir, parse(target).name)
 
-    var mediator = join(resolve(__dirname, '..', api, serviceMediatorDir), basename(service) + '.js')
+    var mediator = join(resolve(__dirname, apiDir, targets), basename(target) + '.js')
     var cmp
     mediator = proxyquire(mediator, {
       [componentMarker]: ({name}, ctx, opts) => {
@@ -40,20 +42,20 @@ module.exports = (issues) => {
     mediator({mu: {outbound: () => {}}, server: {route: () => {}}})
 
     if (!cmp) return
-    if (cmp !== parse(service).name) {
+    if (cmp !== parse(target).name) {
       issues.push({
         type: 'warning',
-        msg: `component registered in ${service} mediator does not match name: "${cmp}" should be "${basename(service)}"`
+        msg: `component registered in ${target} mediator does not match name: "${cmp}" should be "${basename(target)}"`
       })
     }
     return {
-      name: basename(service),
-      service,
-      cmp: join(service, 'cmp'),
-      srv: join(service, 'srv'),
-      bundle: join(service, 'bundle')
+      name: basename(target),
+      target,
+      cmp: join(target, 'cmp'),
+      srv: join(target, 'srv'),
+      bundle: join(target, 'bundle')
     }
   }).filter(Boolean)
 
-  return fullstackers
+  return targs
 }

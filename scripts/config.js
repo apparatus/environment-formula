@@ -1,8 +1,11 @@
+const {join} = require('path')
 module.exports = {
-  api: 'services/api',
   frontendNs: 'frontend',
-  servicesDir: 'services',
-  serviceMediatorDir: 'services',
+  frontendDir: join('..', 'system', 'frontend'),
+  apiDir: join('..', 'system', 'api'),
+  systemDir: join('..', 'system'),
+  servicesDir: join('..', 'system', 'services'),
+  targets: 'targets',
   componentMarker: '../lib/component',
   packageDirs: [
     '',

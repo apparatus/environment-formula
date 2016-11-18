@@ -1,6 +1,12 @@
 const {resolve, join, basename} = require('path')
 const fs = require('fs')
-const {api, serviceMediatorDir, servicesDir} = require('./config')
+const {
+  targets, 
+  servicesDir, 
+  systemDir,
+  apiDir,
+  frontendDir
+} = require('./config')
 
 if (process.mainModule === module) {
   const issues = []
@@ -15,13 +21,29 @@ if (process.mainModule === module) {
 
 module.exports = verify
 
-function verify (fullstackers, issues) {
+function verify (targs, issues) {
   var list = []
 
-  list = check(list, fullstackers, 'service')
-  list = check(list, fullstackers, 'service', 'cmp')
-  list = check(list, fullstackers, 'service', 'srv')
-  list = check(list, fullstackers, 'service', 'bundle')
+  if (doesNotExist('fatal', resolve(__dirname, systemDir))) {
+    return fatal(`${resolve(__dirname, systemDir)} not found`)
+  }
+
+  if (doesNotExist('fatal', resolve(__dirname, servicesDir))) {
+    return fatal(`${resolve(__dirname, servicesDir)} not found`)
+  }
+
+  if (doesNotExist('fatal', resolve(__dirname, apiDir))) {
+    return fatal(`${resolve(__dirname, apiDir)} not found`)
+  }
+
+  if (doesNotExist('fatal', resolve(__dirname, frontendDir))) {
+    return fatal(`${resolve(__dirname, frontendDir)} not found`)
+  }
+
+  list = check(list, targs, 'service')
+  list = check(list, targs, 'service', 'cmp')
+  list = check(list, targs, 'service', 'srv')
+  list = check(list, targs, 'service', 'bundle')
 
   issues.push(...list)
 
@@ -30,7 +52,7 @@ function verify (fullstackers, issues) {
     console.error(describe(issues))
   }
 
-  function exists (type, service, sub) {
+  function doesNotExist (type, service, sub) {
     try {
       fs.accessSync(sub || service)
     } catch (e) {
@@ -39,19 +61,19 @@ function verify (fullstackers, issues) {
         path: service,
         [type]: sub,
         name: basename(service),
-        med: join(resolve(__dirname, '..', api, serviceMediatorDir), basename(service) + '.js'),
-        index: require.resolve(resolve(__dirname, '..', api)),
-        env: resolve(__dirname, '..', servicesDir)
+        med: join(resolve(__dirname, apiDir, targets), basename(service) + '.js'),
+        index: require.resolve(resolve(__dirname, apiDir)),
+        env: resolve(__dirname, '..')
       }
     }
   }
 
-  function check (list, fullstackers, service, sub) {
+  function check (list, targs, service, sub) {
     return list
         .concat(
-          fullstackers
-            .filter(({service}) => !list.find(({type}) => type === service))
-            .map((f) => exists('cmp', f.service, sub && f[sub]))
+          targs
+            .filter(({target}) => !list.find(({type}) => type === target))
+            .map((f) => doesNotExist('cmp', f.target, sub && f[sub]))
         ).filter(Boolean)
   }
 
@@ -85,13 +107,13 @@ function verify (fullstackers, issues) {
 
   function describeService (issues) {
     if (issues.length === 0) { return '' }
-    const index = require.resolve(resolve(__dirname, '..', api))
+    const index = require.resolve(resolve(__dirname, apiDir))
     const env = resolve(__dirname, '..')
     if (issues.length === 1) {
       return `
         Unable to find the "${issues[0].name}" service
 
-        Service mediator:
+        api target:
           ${issues[0].med}
 
         Was required in:
@@ -107,7 +129,7 @@ function verify (fullstackers, issues) {
         Unable to find the services:
           ${issues.map(({name}) => `"${name}"`).join(', ')}
         
-        Service mediators:
+        api targets:
           ${issues.map(({med}, i) => (i ? '        ' : '') + med).join('\n')}
 
         Were required in:
@@ -121,12 +143,11 @@ function verify (fullstackers, issues) {
 
   function describeUiCmp (issues) {
     if (issues.length === 0) { return '' }
-
     if (issues.length === 1) {
       return `
         Unable to find the ui component for "${issues[0].name}"
 
-        Was declared with the ${'`'}component${'`'} function in service mediator:
+        Was declared with the ${'`'}component${'`'} function in api target:
           ${issues[0].med}
 
         But has no corresponding component at:
@@ -139,7 +160,7 @@ function verify (fullstackers, issues) {
         Unable to find ui components in services:
           ${issues.map(({name}) => `"${name}"`).join(', ')}
         
-        Was declared with the ${'`'}component${'`'} function in service mediators:
+        Was declared with the ${'`'}component${'`'} function in api targets:
           ${issues.map(({med}, i) => (i ? '        ' : '') + med).join('\n')}
 
         But have no corresponding component at:
@@ -155,7 +176,7 @@ function verify (fullstackers, issues) {
       return `
         Unable to find the backend service for "${issues[0].name}"
 
-        Has a service mediator at: 
+        Has a api target at: 
           ${issues[0].med}
 
         But has no corresponding backend service at:
@@ -168,7 +189,7 @@ function verify (fullstackers, issues) {
         Unable to find backend services for: 
           ${issues.map(({name}) => `"${name}"`).join(', ')}
         
-        Has service mediators at: 
+        Has api targets at: 
           ${issues.map(({med}, i) => (i ? '        ' : '') + med).join('\n')}
 
         But have no corresponding backend service at:
@@ -196,4 +217,9 @@ function verify (fullstackers, issues) {
 
       `.replace(/^ {6}/gm, '   ')
   }
+}
+
+function fatal (msg) {
+  console.error('\n', 'Fatal:', msg)
+  process.exit(1)
 }
