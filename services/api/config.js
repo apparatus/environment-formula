@@ -14,7 +14,7 @@ module.exports = {
       instantation: {},
       connection: {
         port: env.API_PORT || 7000,
-        host: env.API_HOST || 'localhost'
+        host: env.API_HOST || '0.0.0.0'
       }
     }
   },

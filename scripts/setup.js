@@ -8,7 +8,6 @@ var packs = [''].concat(require('./config').packageDirs)
 var cwd = process.cwd()
 series({}, packs.map((p) => (cb) => install(join(cwd, p), cb)), (err, codes) => {
   if (!err && !codes.filter((c) => c.code).length) {
-    console.log('successfully installed all sub-deps')
     return
   }
   console.error(err, codes)
